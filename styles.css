@@ -1,0 +1,19 @@
+#stego {
+  white-space: pre;
+  font-family: monospace;
+}
+
+.invisible {
+  color: #000000;
+}
+
+html {
+  font-family: 'Courier New', monospace;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: 2.5vh;
+}
+
+a {
+  color: lime;
+}
