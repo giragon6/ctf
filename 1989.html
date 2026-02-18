@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>CTF</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <h1>Part 1: JPEGs</h1>
+	<p>You made it! Your next flag can be found in the <strong>first color value</strong> of the .JPEG image below. 
+    But, oh no! It seems like I'm about to run out of storage on this site. Better size the image down first!</p>
+  <p>(Hint: You'll need to download the image and use <a href="https://cgjennings.ca/articles/jpeg-compression/">this website</a>. Since I'm really low on storage, you'll want to make it as small as possible!)</p>
+  <p>(Hint 2: The lower quality the image, the smaller its file will be)</p>
+  <img src="./assets/ncssm.jpg" alt="A JPEG image of NCSSM"><br>
+  <button class="text-btn" 
+		id="whats-ctf" 
+		data-say="Great question! JPEG images are known as 'lossy,' which means they don't capture all the data of an image when they compress it. PNGs are lossless, so they capture all the data, but that means they have a bigger file size.">
+			How are JPEG images different than PNGs?
+	</button> 
+  <button class="text-btn" data-say="You'll see on the JPEG compression site that JPEGs store two tables: luminance, aka brightness, and chrominance, aka color. Try using the 'Choose your own image' option with the interactive tool to access these tables for the image!">
+    Can I have a hint?
+  </button>
+	<p></p>
+<pre style="font-size: 3vh" id="stego">
+                           .       .
+                          / `.   .' " 
+                  .---.  <    > <    >  .---.
+                  |    \\  \\ - ~ ~ - /  /    |
+        _____          ..-~             ~-..-~
+      |     |   \\~~~\\.'                    `./~~~/
+      ---------   \\__/                        \\__/
+    .'  O    \\     /               /       \\  " 
+  (_____,    `._.'               |         }  \\/~~~/
+    `----.          /       }     |        /    \\__/
+          `-.      |       /      |       /      `. ,~~|
+              ~-.__|      /_ - ~ ^|      /- _      `..-‘ / \\  /\\
+                    |     /        |     /     ~-.     `-/ _ \\/__\\
+                    |_____|        |_____|         ~ - . _ _ _ _ _>
+</pre>
+</body>
+<script>
+  alert("Website Storage Full: You can free up space on this website by compressing some of your large images.")
+</script>
+<script src="script.js" type="module"></script>
+</html>
