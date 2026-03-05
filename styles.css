@@ -1,12 +1,23 @@
 :root {
-  --background-color: #fffdf0;
-  --text-color: #000000;
-  --link-color: rgb(0, 132, 255);
+  --background-color: #000000;
+  --text-color: #e100ff;
+  --link-color: rgb(0, 255, 13);
+  --stego-color: #00ff99;
+}
+
+strong {
+  color: #00fff2;
+}
+
+button {
+  background-color: #000000;
+  color: var(--stego-color);
 }
 
 #stego {
   white-space: pre;
   font-family: monospace;
+  color: var(--stego-color);
 }
 
 .img-grid {
