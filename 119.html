@@ -8,11 +8,25 @@
 </head>
 
 <body>
-  <h1>Part 2: Coming Soon</h1>
+  <h1>Part 2: Run-length Encoding</h1>
+  <p>Nice job! You might have seen in the last page that JPEG is a lossy compression format. But what does being lossless really mean? How can you make an image smaller without losing any details?</p>
+  <p>Well, a lot of data storage is actually really inefficient. Imagine an image that stores three values -- red, green, and blue -- for each pixel.</p>
+  <div class="img-grid" id="uncompressed-face"></div>
+  <p>That's three numbers for each pixel. Doesn't seem like much for this 5x5 image, but recall that an HD screen is 1280x720 pixels: nearly three million numbers for each image!</p>
+  <p>Run-length encoding reduces file size by taking advantage of repetition in image encodings. For example, in the image above, you can see that the pixels are either yellow or black and that the yellow pixels often appear in sequences of more than one.</p>
+  <p>That means that we can instead describe the image as having five yellow pixels rather than repeating "yellow" five times.</p>
+  <p>See how much less data we need to encode the same image?</p>
+  <div class="img-grid" id="compressed-face"></div>
+  <p>Pretty cool! For the next flag, you're looking for the <strong>hex code</strong> (without the #) of the longest run in the 15x15 pixel image below. Good luck!</p>
+  <img src="./assets/unicorn.png" class="unicorn" alt="A pixel art image of a unicorn"><br>
   <button class="text-btn" 
-		data-say="Hi">
-			Hi
+		data-say="A run is a sequence of pixels in a row of the same color! For example, the longest run in the yellow face image is 5.">
+			What's a run again?
 	</button> 
+  <button class="text-btn"
+    data-say="Look for patches where there are a lot of the same color! Then, when you find the run with more pixels than any other run, put the image into something like https://imagecolorpicker.com/ to get the color.">
+    Can I have a hint?
+  </button>
 <pre style="font-size: 3vh" id="stego">
          
                              / `.   .' " 

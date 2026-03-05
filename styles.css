@@ -1,21 +1,50 @@
+:root {
+  --background-color: #fffdf0;
+  --text-color: #000000;
+  --link-color: rgb(0, 132, 255);
+}
+
 #stego {
   white-space: pre;
   font-family: monospace;
 }
 
+.img-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 6em);
+  grid-template-rows: repeat(5, 6em);
+  gap: 0;
+}
+
+.pixel {
+  font-size: large;
+  text-align: center;
+  height: 100%;
+  font-size: x-small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .invisible {
-  color: #000000;
+  color: var(--background-color);
+}
+
+.unicorn {
+  width: 150px;
+  height: 150px;
+  image-rendering: pixelated;
 }
 
 html {
-  font-family: 'Courier New', monospace;
-  background-color: #000000;
-  color: #FFFFFF;
+  font-family: monospace;
+  background-color: var(--background-color);
+  color: var(--text-color);
   font-size: 2.5vh;
 }
 
 a {
-  color: lime;
+  color: var(--link-color);
 }
 
 button {
