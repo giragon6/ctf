@@ -6,59 +6,87 @@
 	<title>CTF</title>
 	<link rel="stylesheet" href="styles.css">
   <style>
-    .d {
-      color: red;
+    #gifs {
+      position: relative;
+      top: 0;
+      left: 0;
     }
-    .u {
-      color: lime;
+
+    #normal {
+      position: relative;
+      top: 0;
+      left: 0;
     }
-    .r {
-      color: blue;
+
+    #normal:hover {
+      opacity: 0;
     }
-    .c {
-      color: orange;
+
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
-    .s {
-      color: rgb(153, 0, 255);
+
+    #overlay:hover {
+      display: block;
+    }
+
+    .frames {
+      display: flex;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .frame {
+      box-shadow: 0 0 0 5px #e100ff;
+    }
+
+    .frameblue {
+      box-shadow: 0 0 0 5px #00fff2;
     }
   </style>
 </head>
 
 <body>
-  <h1>Part 3: Arithmetic Encoding</h1>
-  <p>As time goes on, more and more efficient encoding algorithms are encoded. And, naturally, these more efficient algorithms become more and more complicated.</p>
-  <p>One of the easier (emphasis on -er!) complex algorithms to grasp is <strong>arithmetic encoding</strong>. The idea behind arithmetic encoding is that you can represent strings of characters as decimals.</p>
-  <p>
-    Imagine you want to encode a message consisting of a combination of the letters <span class="d">D</span>, <span class="u">U</span>, <span class="r">R</span>, <span class="c">C</span>, and <span class="s">S</span>. 
-    To do this with arithmetic encoding, first take a number line that goes from 0 (inclusive) to 1 (exclusive).</p>
-  <p>Then, split the number line into 5 parts -- one for each letter -- and label it with the appropriate decimals.</p>
-  <img src="assets/part3/ae1.png"></img>
-  <p>Now, say you want to encode the word <span class="d">D</span><span class="u">U</span><span class="r">R</span><span class="c">C</span><span class="s">S</span>. 
-    The first letter is <span class="d">D</span>, so we'll "select" that interval (<span class="d">0 to 0.2</span>) and zoom in on it.</p>
-  <p>Then, we'll split the <span class="d">D</span> section into fifths just like with the initial number line.</p>
-  <img src="assets/part3/ae2.png"></img>
-  <p>The next letter is <span class="u">U</span>, so we'll select the <span class="u">U</span> interval of the <span class="d">D</span> interval (<span class="u">0.04 to 0.08</span>) and zoom in on it. 
-    We'll then repeat this process for <span class="r">R</span>, <span class="c">C</span>, and <span class="s">S</span>.</p>
-  <img src="assets/part3/ae3.png"></img>
-  <p>
-    Now we're left with our final interval: <span class="s">0.06208 to 0.0624</span> (if you're confused on where this comes from, look at the interval under the <span class="s">S</span> on the final number line!).
-    When we give the arithmetic encoding algorithm some value in this range and the number of letters in our word, it can work backwards and recreate the string!</p>
-  <p>To see why this is cool and useful, let's say we wanted to encode the same message in ASCII, one of the most common text encodings. In ASCII, each letter corresponds to a number between 0 and 255, so <span class="d">D</span><span class="u">U</span><span class="r">R</span><span class="c">C</span><span class="s">S</span> would be 100 117 114 99 115.</p>
-  <p>We need 5 whole numbers instead of just 2! Think about if we wanted to make a longer message. The number of ASCII values we need would become a lot longer, whereas we could just keep going with the same decimal in arithmetic encoding and still just need one number.</p>
-  <p>Of course, this page is a vast oversimplification. Computers don't think in decimals, so all our decimals would really be long strings of 0's and 1's, and computers do some weird things with decimals that we have to account for.</p>
-  <p>
-    One of the coolest and most useful things about arithmetic encoding is that the partitions don't have to be the same size. 
-    In practice, we analyze the text we're trying to encode to determine if some letters appear more often. 
-    The most common letters get big partitions, which means that when we have a word with a lot of common letters, we can encode it in a much shorter decimal.
-  </p>
-  <p>But we won't worry about that today -- this level has gone on long enough! Your flag is the word you get when you <strong>decode</strong> a word represented by <strong>0.06135</strong> that has <strong>5 letters</strong> in the <strong>DURCS-alphabet</strong> example we explored.</p>
+  <h1>Part 3: Video Compression</h1>
+
+  <div id="gifs">
+      <img src="assets/part3/normaldinogame.gif" id="normal">
+      <img src="assets/part3/overlaydinogame.gif" id="overlay">
+  </div>
+
+  <p>Take a look at the slowed down video above. It's 3 646x161 frames of the Chrome dinosaur game, or 312018 pixels in all. That's a lot of values, and this is only three frames of a low resolution video! If you realize that most videos are posted in 1920x1080 resolution with 30 frames per second, you'll see how this becomes an issue.</p>
+  <p>Now, hover over that video. You'll see an overlay in white of the pixels that have actually changed between one frame and the next, which is only a tiny fraction of all the pixels in the image. To encode this video in data, all the data you need is the <strong>initial state</strong> and <strong>the difference between each frame and the one before</strong>.</p>
+  <p>To demonstrate, I've created a new, simplified video format. Say we have a 4-frame, 3x3 pixel video in black and white, the frames of which are shown below. In my method, the first 3 frames of the image are represented as this sequence of numbers and characters: "101010101|3090.10317091.". Your next flag is the <strong>sequence of numbers that needs to be added to my sequence to encode the fourth frame</strong>. Good luck!</p>
+
+  <div class="frames">
+    <div>
+      <p class="imglabel">Frame 1:</p>
+      <img class="frame" src="assets/part3/frame1.png">
+    </div>
+        <div>
+      <p class="imglabel">Frame 2:</p>
+      <img class="frame" src="assets/part3/frame2.png">
+    </div>
+        <div>
+      <p class="imglabel">Frame 3:</p>
+      <img class="frame" src="assets/part3/frame3.png">
+    </div>
+      <div>
+      <p class="imglabel"><strong>Frame 4:</strong></p>
+      <img class="frameblue" src="assets/part3/frame4.png">
+    </div>
+  </div>
+  
   <button class="text-btn"
-     data-say="If you're confused, don't worry -- this is a confusing concept! The word we just decoded, DURCS, was also a 5-letter word in the DURCS alphabet. Focus on the final number line in our example, and remember that decoding the decimal into a word is all about the *range* it falls within.">
-    Wait, what?
+     data-say="The data format is all about differences. So, the sequence for the first three frames will have a sequence for the initial state (frame 1), a sequence for the changes made to the initial to get frame 2, and a sequence for the changes made to frame 2 to get frame 3. Each sequence is separated by a special character.">
+    What's going on with the sequence for the first three frames?
   </button>
   <button class="text-btn"
-     data-say="Sure! Notice that the decimal we're decoding, 0.06135, falls in the range 0.06112 to 0.06144. This should look very familiar -- it's in the final number line, which means that the first four letters of our new word are the same as the first four letters in our example word. What letter is the range 0.06112 to 0.06144 associated with?">
-    Can I have another hint?
+     data-say="Each pixel has basically two &quot;properties&quot;: its color (either white or black) and its position. Start there and compare each part of the sequence to the first three frames!">
+    What do all those numbers represent?
   </button>
 <pre style="font-size: 3vh" id="stego">
          
@@ -78,4 +106,5 @@
 </pre>
 </body>
 <script src="script.js" type="module"></script>
+<script src="part3.js" type="module"></script>
 </html>
